@@ -13,11 +13,13 @@ import com.nugroho.spring.api.utility.ResponseSuccess;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin
-@RestController(value = Routes.API_V1 + Routes.BOOK)
 @RequiredArgsConstructor
+@RestController
+@RequestMapping(Routes.API_V1 + Routes.BOOKS)
 public class BookController {
 
     private BookUseCase useCase;

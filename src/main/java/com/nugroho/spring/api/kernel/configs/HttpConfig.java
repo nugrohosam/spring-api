@@ -1,18 +1,22 @@
 package com.nugroho.spring.api.kernel.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 
+import lombok.RequiredArgsConstructor;
+
 import java.io.IOException;
 
 import com.nugroho.spring.api.applications.requests.HeadersPayload;
 
+@Configuration
+@RequiredArgsConstructor
 public class HttpConfig implements ClientHttpRequestInterceptor {
 
-    @Autowired
     private HeadersPayload headersPayload;
 
     @Override

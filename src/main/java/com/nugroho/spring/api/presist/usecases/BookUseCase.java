@@ -3,7 +3,8 @@ package com.nugroho.spring.api.presist.usecases;
 import com.nugroho.spring.api.applications.requests.v1.book.BookCreateDto;
 import com.nugroho.spring.api.applications.requests.v1.book.BookParams;
 import com.nugroho.spring.api.presist.models.book.Book;
-import com.nugroho.spring.api.presist.repos.BookRepo;
+import com.nugroho.spring.api.presist.repos.book.BookRepo;
+import com.nugroho.spring.api.presist.repos.book.BookSpec;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,13 +17,13 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class BookUseCase {
-    
+
     private BookRepo bookRepo;
-    private BookRepo.Spec spec;
+    private BookSpec spec;
 
     public Page<Book> getAll(BookParams params) {
         var page = PageRequest.of(params.getPage(), params.getSize(), Sort.by("id").descending());
-        return bookRepo.findWithCondition(spec.filter(params), page);
+        return bookRepo.findAll(spec.filter(params), page);
     }
 
     public Book findById(Long id) throws Exception {
