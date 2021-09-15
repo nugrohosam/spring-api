@@ -1,6 +1,6 @@
 package com.nugroho.spring.api.presist.repos;
 
-import com.nugroho.spring.api.presist.models.book.Book;
+import com.nugroho.spring.api.presist.models.author.Author;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,18 +11,18 @@ import java.util.ArrayList;
 
 import javax.persistence.criteria.Predicate;
 
-import com.nugroho.spring.api.applications.requests.v1.book.BookParams;
+import com.nugroho.spring.api.applications.requests.v1.author.AuthorParams;
 
-public interface BookRepo extends JpaRepository<Book, Long> {
-    public Page<Book> findWithCondition(Specification<Book> spec, Pageable page);
+public interface AuthorRepo extends JpaRepository<Author, Long> {
+    public Page<Author> findWithCondition(Specification<Author> spec, Pageable page);
 
     class Spec {
-        public Specification<Book> filter(BookParams params) {
+        public Specification<Author> filter(AuthorParams params) {
             var predicates = new ArrayList<Predicate>();
             return (root, query, cb) -> {
                 predicates.add(cb.like(cb.lower(root.get("name")), params.getSearch()));
-                var predicateInArr = predicates.toArray(new Predicate[predicates.size()]);
-                return query.where(predicateInArr).getRestriction();
+                var predicatesInArr = predicates.toArray(new Predicate[predicates.size()]);
+                return query.where(predicatesInArr).getRestriction();
             };
         }
     }

@@ -1,4 +1,4 @@
-package com.nugroho.spring.api.requests.v1;
+package com.nugroho.spring.api.applications.requests.v1;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.nugroho.spring.api.presist.models;
+package com.nugroho.spring.api.presist.models.book;
 
 import java.util.Date;
 
@@ -18,7 +18,6 @@ import lombok.Data;
 @Entity
 @Table(name = "books")
 public class Book {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
