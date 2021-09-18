@@ -1,5 +1,6 @@
 package com.nugroho.spring.api.presist.models.book;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "books")
-public class Book {
+public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,6 +1,6 @@
 package com.nugroho.spring.api.kernel.configs;
 
-import com.nugroho.spring.api.applications.validations.middlewares.HandlerMiddleware;
+import com.nugroho.spring.api.applications.validations.middlewares.HandlerGlobalMiddleware;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +14,11 @@ import org.springframework.security.config.annotation.method.configuration.Globa
 public class MiddlewareConfig extends GlobalMethodSecurityConfiguration {
 
     @Autowired
-    private HandlerMiddleware handlerMiddleware;
+    private HandlerGlobalMiddleware handlerMiddleware;
 
     @Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {
+        System.out.println("woke middleware kernel");
         var expressionHandler = new DefaultMethodSecurityExpressionHandler();
         expressionHandler.setPermissionEvaluator(handlerMiddleware);
         return expressionHandler;
