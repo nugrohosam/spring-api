@@ -9,7 +9,7 @@ import lombok.Data;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ResponseFail implements Response {
     private String api = "v1";
-    private int code;
+    private int code = -1;
     private Object message;
     private Object errors;
 }

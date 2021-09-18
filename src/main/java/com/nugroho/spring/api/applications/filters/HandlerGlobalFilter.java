@@ -7,7 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nugroho.spring.api.utility.Global;
+import com.nugroho.spring.api.utility.ResponseFail;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -15,13 +20,30 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class HandlerGlobalFilter extends OncePerRequestFilter {
 
     @Autowired
+    private JwtFilter jwtFilter;
+
+    @Autowired
     private HeaderFilter headerFilter;
+
+    @Autowired
+    private RouteFilter routeFilter;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
-        System.out.println("here request filter");
-        headerFilter.doFilter(request);
-        filterChain.doFilter(request, response);
+
+        try {
+            headerFilter.doFilter(request);
+            jwtFilter.doFilter(request);
+            routeFilter.doFilter(request);
+            filterChain.doFilter(request, response);
+        } catch (AccessDeniedException err) {
+            var res = new ResponseFail();
+            res.setMessage(err.getMessage());
+            response.setStatus(HttpStatus.FORBIDDEN.value());
+            response.setContentType("application/json");
+            response.getWriter().write(Global.convertObjectToJson(res));
+        }
+
     }
 }

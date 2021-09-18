@@ -1,5 +1,8 @@
 package com.nugroho.spring.api.utility;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -19,8 +22,21 @@ public class Global {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    public static ResponseEntity<Response> resFail(Response res, HttpStatus status) {
+        return new ResponseEntity<>(res, status);
+    }
+
     public static ResponseEntity<String> resSuccess(String res) {
         return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    public static String convertObjectToJson(Object object) throws JsonProcessingException {
+        if (object == null) {
+            return null;
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(object);
     }
 
 }
