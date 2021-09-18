@@ -1,4 +1,4 @@
-package com.nugroho.spring.api.applications.controllers;
+package com.nugroho.spring.api.applications.controllers.v1;
 
 import org.springframework.web.bind.annotation.RestController;
 
