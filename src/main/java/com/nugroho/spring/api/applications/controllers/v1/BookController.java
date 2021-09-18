@@ -32,10 +32,10 @@ public class BookController {
 
     @Autowired
     private BookUseCase useCase;
+    private ResponseSuccess res = new ResponseSuccess();
 
     @GetMapping
     public ResponseEntity<Response> index(BookParams params) {
-        var res = new ResponseSuccess();
         var dataPaginate = useCase.getAll(params);
         res.setData(BookList.paginate(dataPaginate));
         return Global.resSuccess(res);
@@ -44,7 +44,6 @@ public class BookController {
     @GetMapping(path = Routes.ID)
     public ResponseEntity<Response> detail(@PathVariable(name = "id") Long id) throws Exception {
         var data = useCase.findById(id);
-        var res = new ResponseSuccess();
         res.setData(BookDetail.mapping(data));
         return Global.resSuccess(res);
     }
