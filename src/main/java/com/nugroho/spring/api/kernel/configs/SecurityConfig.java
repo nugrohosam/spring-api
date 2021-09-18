@@ -1,6 +1,6 @@
 package com.nugroho.spring.api.kernel.configs;
 
-import com.nugroho.spring.api.applications.validations.filters.HandlerGlobalFilter;
+import com.nugroho.spring.api.applications.filters.HandlerGlobalFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

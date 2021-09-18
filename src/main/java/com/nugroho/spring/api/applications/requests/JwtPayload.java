@@ -11,5 +11,6 @@ import lombok.Data;
 public class JwtPayload {
     private Long id;
     private String name;
+    private String username;
     private String role;
 }

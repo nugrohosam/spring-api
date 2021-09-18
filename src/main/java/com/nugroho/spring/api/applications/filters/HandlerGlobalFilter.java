@@ -1,4 +1,4 @@
-package com.nugroho.spring.api.applications.validations.filters;
+package com.nugroho.spring.api.applications.filters;
 
 import java.io.IOException;
 

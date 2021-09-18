@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Component
 @RequestScope
-public class HeadersPayload {
+public class HeaderPayload {
     public static String KEY_TIME_UTC = "Utc";
     public static String KEY_PLATFORM = "Platform";
     public static String KEY_ROLE = "Role";
