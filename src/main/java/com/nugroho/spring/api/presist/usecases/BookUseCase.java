@@ -2,6 +2,7 @@ package com.nugroho.spring.api.presist.usecases;
 
 import com.nugroho.spring.api.applications.requests.v1.book.BookCreateDto;
 import com.nugroho.spring.api.applications.requests.v1.book.BookParams;
+import com.nugroho.spring.api.applications.requests.v1.book.BookUpdateDto;
 import com.nugroho.spring.api.global.Config;
 import com.nugroho.spring.api.presist.models.book.Book;
 import com.nugroho.spring.api.presist.repos.book.BookRepo;
@@ -33,7 +34,7 @@ public class BookUseCase {
         return bookRepo.findAll(spec.filter(params), page);
     }
 
-    @Cacheable(value = Config.BOOK_CACHE, key = "#book.id")
+    @Cacheable(value = Config.BOOK_CACHE)
     public Book findById(Long id) throws Exception {
         return bookRepo.findById(id).orElseThrow(() -> new NotFoundException(""));
     }
@@ -47,8 +48,8 @@ public class BookUseCase {
 
     @Caching(evict = { @CacheEvict(value = Config.BOOK_CACHE_LIST, allEntries = true),
             @CacheEvict(value = Config.BOOK_CACHE, key = "#book.id", allEntries = true) })
-    public Book update(BookCreateDto dto) throws Exception {
-        var newBook = new Book();
+    public Book update(Long id, BookUpdateDto dto) throws Exception {
+        var newBook = findById(id);
         newBook.setName(dto.getName());
         return bookRepo.save(newBook);
     }

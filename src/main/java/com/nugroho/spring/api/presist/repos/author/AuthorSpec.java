@@ -12,10 +12,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthorSpec {
+
+    private final String columnName = "name";
+
     public Specification<Author> filter(AuthorParams params) {
         var predicates = new ArrayList<Predicate>();
         return (root, query, cb) -> {
-            predicates.add(cb.like(cb.lower(root.get("name")), params.getSearch()));
+            predicates.add(cb.like(root.get(columnName), params.getSearch()));
             var predicateInArr = predicates.toArray(new Predicate[predicates.size()]);
             return query.where(predicateInArr).getRestriction();
         };

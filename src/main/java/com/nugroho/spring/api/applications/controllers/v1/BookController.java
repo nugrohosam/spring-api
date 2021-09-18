@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import com.nugroho.spring.api.applications.requests.v1.book.BookCreateDto;
 import com.nugroho.spring.api.applications.requests.v1.book.BookParams;
+import com.nugroho.spring.api.applications.requests.v1.book.BookUpdateDto;
 import com.nugroho.spring.api.applications.response.v1.book.BookDetail;
 import com.nugroho.spring.api.applications.response.v1.book.BookList;
 import com.nugroho.spring.api.global.Routes;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -40,7 +42,7 @@ public class BookController {
     }
 
     @GetMapping(path = Routes.ID)
-    public ResponseEntity<Response> detail(@PathVariable Long id) throws Exception {
+    public ResponseEntity<Response> detail(@PathVariable(name = "id") Long id) throws Exception {
         var data = useCase.findById(id);
         var res = new ResponseSuccess();
         res.setData(BookDetail.mapping(data));
@@ -51,6 +53,12 @@ public class BookController {
     public ResponseEntity<String> create(@Valid @RequestBody BookCreateDto bookDto) throws Exception {
         useCase.create(bookDto);
         return Global.resSuccess("Success create");
+    }
+
+    @PutMapping(path = Routes.ID)
+    public ResponseEntity<String> update(@PathVariable(name = "id") Long id, @Valid @RequestBody BookUpdateDto bookDto) throws Exception {
+        useCase.update(id, bookDto);
+        return Global.resSuccess("Success udpate");
     }
 
 }

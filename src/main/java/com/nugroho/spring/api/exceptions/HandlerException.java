@@ -23,6 +23,7 @@ public class HandlerException extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Response> handle(RuntimeException ex, WebRequest request) {
         response.setMessage("Internal service error");
+        ex.printStackTrace();
         Global.report(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -30,6 +31,7 @@ public class HandlerException extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Response> handle(Exception ex, WebRequest request) {
         response.setMessage("Internal service error");
+        ex.printStackTrace();
         Global.report(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
