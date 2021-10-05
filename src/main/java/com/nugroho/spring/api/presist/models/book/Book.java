@@ -26,6 +26,9 @@ public class Book implements Serializable {
     @Column
     private String name;
 
+    @Column
+    private Date releaseDate;
+
     @CreationTimestamp
     private Date createdAt;
 

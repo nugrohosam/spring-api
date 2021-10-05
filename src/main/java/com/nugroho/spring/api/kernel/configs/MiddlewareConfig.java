@@ -18,7 +18,6 @@ public class MiddlewareConfig extends GlobalMethodSecurityConfiguration {
 
     @Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {
-        System.out.println("woke middleware kernel");
         var expressionHandler = new DefaultMethodSecurityExpressionHandler();
         expressionHandler.setPermissionEvaluator(handlerMiddleware);
         return expressionHandler;

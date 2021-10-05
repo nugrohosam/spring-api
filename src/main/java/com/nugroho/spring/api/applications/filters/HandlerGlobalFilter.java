@@ -16,6 +16,8 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import io.jsonwebtoken.SignatureException;
+
 @Component
 public class HandlerGlobalFilter extends OncePerRequestFilter {
 
@@ -25,9 +27,6 @@ public class HandlerGlobalFilter extends OncePerRequestFilter {
     @Autowired
     private HeaderFilter headerFilter;
 
-    @Autowired
-    private RouteFilter routeFilter;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
@@ -35,12 +34,17 @@ public class HandlerGlobalFilter extends OncePerRequestFilter {
         try {
             headerFilter.doFilter(request);
             jwtFilter.doFilter(request);
-            routeFilter.doFilter(request);
             filterChain.doFilter(request, response);
         } catch (AccessDeniedException err) {
             var res = new ResponseFail();
-            res.setMessage(err.getMessage());
+            res.setMessage("Access Denied");
             response.setStatus(HttpStatus.FORBIDDEN.value());
+            response.setContentType("application/json");
+            response.getWriter().write(Global.convertObjectToJson(res));
+        } catch (SignatureException err) {
+            var res = new ResponseFail();
+            res.setMessage("Unauthorized");
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType("application/json");
             response.getWriter().write(Global.convertObjectToJson(res));
         }

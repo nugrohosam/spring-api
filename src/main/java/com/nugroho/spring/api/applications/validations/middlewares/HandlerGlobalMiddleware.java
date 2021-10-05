@@ -28,11 +28,13 @@ public class HandlerGlobalMiddleware implements PermissionEvaluator {
 
     @Override
     public boolean hasPermission(Authentication auth, Object nameFunction, Object param) {
-        System.out.println("here middleware " + param.toString());
+
         Middleware.parseParam(param);
         String typeOfCheck = Middleware.key;
 
         switch (typeOfCheck) {
+            case Middleware.CHECK_AUTH:
+                return jwtPayload.getId() != null;
             case Middleware.CHECK_PERMISSION:
                 var permission = Middleware.permission;
                 return checkPermission.check(jwtPayload.getId(), permission);

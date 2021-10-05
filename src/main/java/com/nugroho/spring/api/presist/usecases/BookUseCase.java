@@ -34,7 +34,7 @@ public class BookUseCase {
         return bookRepo.findAll(spec.filter(params), page);
     }
 
-    @Cacheable(value = Config.BOOK_CACHE)
+    @Cacheable(value = Config.BOOK_CACHE, key = "#id")
     public Book findById(Long id) throws Exception {
         return bookRepo.findById(id).orElseThrow(() -> new NotFoundException(""));
     }
@@ -43,11 +43,12 @@ public class BookUseCase {
     public Book create(BookCreateDto dto) throws Exception {
         var newBook = new Book();
         newBook.setName(dto.getName());
+        newBook.setReleaseDate(dto.getReleaseDate());
         return bookRepo.save(newBook);
     }
 
     @Caching(evict = { @CacheEvict(value = Config.BOOK_CACHE_LIST, allEntries = true),
-            @CacheEvict(value = Config.BOOK_CACHE, key = "#book.id", allEntries = true) })
+            @CacheEvict(value = Config.BOOK_CACHE, key = "#id") })
     public Book update(Long id, BookUpdateDto dto) throws Exception {
         var newBook = findById(id);
         newBook.setName(dto.getName());

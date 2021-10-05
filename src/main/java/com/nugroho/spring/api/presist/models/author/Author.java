@@ -25,6 +25,9 @@ public class Author {
     @Column
     private String name;
 
+    @Column
+    private Date birthDate;
+
     @CreationTimestamp
     private Date createdAt;
 

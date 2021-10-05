@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Params {
+    
     protected String search;
     protected int page;
     protected int size;
@@ -20,7 +21,7 @@ public class Params {
         return search != null ? "%" + search + "%" : "%%";
     }
 
-    public static boolean isInstanceOf(Object classInstance){
+    public static boolean isInstanceOfMe(Object classInstance){
         return classInstance instanceof Params;
     }
 

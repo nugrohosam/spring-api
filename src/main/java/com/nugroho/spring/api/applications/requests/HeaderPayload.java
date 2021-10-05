@@ -9,13 +9,28 @@ import lombok.Data;
 @Component
 @RequestScope
 public class HeaderPayload {
-    public static String KEY_TIME_UTC = "Utc";
-    public static String KEY_PLATFORM = "Platform";
-    public static String KEY_ROLE = "Role";
-    public static String KEY_AUTHORIZATION = "Authorization";
+    public static final String KEY_TIME_UTC = "Utc";
+    public static final String KEY_PLATFORM = "Platform";
+    public static final String KEY_ROLE = "Role";
+    public static final String KEY_AUTHORIZATION = "Authorization";
 
     private String utc;
     private String platform;
     private String authorization;
     private String role;
+
+    public String getWithKey(String key) {
+        switch (key) {
+            case KEY_TIME_UTC:
+                return this.utc;
+            case KEY_PLATFORM:
+                return this.platform;
+            case KEY_ROLE:
+                return this.authorization;
+            case KEY_AUTHORIZATION:
+                return this.role;
+            default:
+                return null;
+        }
+    }
 }
