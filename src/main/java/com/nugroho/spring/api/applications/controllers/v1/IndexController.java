@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @GetMapping
-    @PreAuthorize("hasPermission(returnObject, '" + Middleware.CHECK_AUTH + "') and hasPermission(returnObject, '" + Middleware.CHECK_PERMISSION + Middleware.SEPARATOR + "AccessV1')")
+    @PreAuthorize("hasPermission(returnObject, '" + Middleware.CHECK_AUTH + "')")
     public ResponseEntity<Response> index() {
         var response = new ResponseSuccess();
         response.setMessage("This is service author, book");

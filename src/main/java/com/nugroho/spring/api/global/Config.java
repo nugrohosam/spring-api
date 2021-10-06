@@ -16,4 +16,8 @@ public class Config {
     public static final String[] DATA_TO_CACHE = { Config.AUTHOR_CACHE, Config.BOOK_CACHE, Config.BOOK_CACHE_LIST,
             Config.AUTHOR_CACHE_LIST };
 
+    // Bean names
+
+    public static final String BEAN_THREAD_EXECUTOR = "threadPoolTaskExecutor";
+
 }
