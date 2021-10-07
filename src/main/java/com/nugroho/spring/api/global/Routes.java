@@ -9,4 +9,5 @@ public class Routes {
     public static final String UPLOADS = "/uploads"; 
     public static final String BOOKS = "/books"; 
     public static final String AUTHORS = "/authors"; 
+    
 }

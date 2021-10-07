@@ -13,16 +13,18 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin
 @RestController
 @RequestMapping(Routes.API_V1)
 public class IndexController {
 
-    @GetMapping
+    private ResponseSuccess response = new ResponseSuccess();
+
+    @GetMapping("/blabla/{id}")
     @PreAuthorize("hasPermission(returnObject, '" + Middleware.CHECK_AUTH + "')")
     public ResponseEntity<Response> index() {
-        var response = new ResponseSuccess();
         response.setMessage("This is service author, book");
         return Global.resSuccess(response);
     }

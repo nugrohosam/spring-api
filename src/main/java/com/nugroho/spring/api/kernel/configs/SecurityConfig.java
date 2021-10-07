@@ -19,6 +19,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(handlerFilter, SessionManagementFilter.class);
-        http.csrf().disable().cors().and().authorizeRequests().anyRequest().permitAll();
+
+        // internal incoming request IP range
+        http
+            .csrf().disable()
+            .cors().and()
+            .authorizeRequests().anyRequest().permitAll();
     }
 }
