@@ -30,16 +30,16 @@ public class HandlerGlobalMiddleware implements PermissionEvaluator {
     public boolean hasPermission(Authentication auth, Object nameFunction, Object param) {
 
         Middleware.parseParam(param);
-        String typeOfCheck = Middleware.key;
+        String typeOfCheck = Middleware.KEY;
 
         switch (typeOfCheck) {
             case Middleware.CHECK_AUTH:
                 return jwtPayload.getId() != null;
             case Middleware.CHECK_PERMISSION:
-                var permission = Middleware.permission;
+                var permission = Middleware.PERMISSION;
                 return checkPermission.check(jwtPayload.getId(), permission);
             case Middleware.CHECK_ROLE:
-                var role = Middleware.role;
+                var role = Middleware.ROLE;
                 return checkRole.check(jwtPayload.getId(), role);
             case Middleware.CHECK_IS_MY_ROLE:
                 return checkRole.check(jwtPayload.getId(), headerPayload.getRole());

@@ -8,17 +8,17 @@ public class Middleware {
     public static final String CHECK_IS_MY_ROLE = "CHECK_IS_MY_ROLE";
     public static final String SEPARATOR = " | ";
 
-    public static String key;
-    public static String role;
-    public static String permission;
+    public static String KEY;
+    public static String ROLE;
+    public static String PERMISSION;
 
     public static void parseParam(Object param) {
         String[] dataParam = param.toString().split(Middleware.SEPARATOR);
 
-        key = dataParam[0];
+        KEY = dataParam[0];
         if (dataParam.length > 1) {
-            role = dataParam[1];
-            permission = dataParam[1];
+            ROLE = dataParam[1];
+            PERMISSION = dataParam[1];
         }
     }
 }
