@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    entrypoint: java -jar /app.jar
+    depends_on:
+      - redis
+      - rabbitmq
+      - postgres
+    links:
+      - redis
+      - rabbitmq
+      - postgres
+    environment:
+      POSTGRE_HOST: postgres
+      RABBITMQ_HOST: rabbitmq
+      REDIS_HOST: redis
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  rabbitmq:
+    image: nugrohosam/rabbitmq-queue
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  postgres:
+    image: postgres
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: springapi
+volumes:
+  logvolume01: {}
