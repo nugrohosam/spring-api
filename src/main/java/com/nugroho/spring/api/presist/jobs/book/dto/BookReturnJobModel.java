@@ -1,4 +1,4 @@
-package com.nugroho.spring.api.presist.jobs.book;
+package com.nugroho.spring.api.presist.jobs.book.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

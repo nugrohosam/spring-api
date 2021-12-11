@@ -1,8 +1,8 @@
-package com.nugroho.spring.api.presist.jobs.book.dto;
+package com.nugroho.spring.api.presist.jobs.book;
 
 import com.google.gson.Gson;
 import com.nugroho.spring.api.presist.jobs.Job;
-import com.nugroho.spring.api.presist.jobs.book.BookReturnJobModel;
+import com.nugroho.spring.api.presist.jobs.book.dto.BookReturnJobModel;
 import com.nugroho.spring.api.utility.Amqp;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

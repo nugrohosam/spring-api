@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import io.sentry.Sentry;
 
 @ControllerAdvice
 public class HandlerException extends ResponseEntityExceptionHandler {
@@ -42,6 +43,7 @@ public class HandlerException extends ResponseEntityExceptionHandler {
     public ResponseEntity<Response> handle(Exception ex, WebRequest request) {
         response.setMessage("Internal service error");
         Global.report(ex.getMessage());
+        Sentry.captureException(ex);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -3,8 +3,8 @@ package com.nugroho.spring.api.applications.controllers.v1;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nugroho.spring.api.global.Routes;
-import com.nugroho.spring.api.presist.jobs.book.BookReturnJobModel;
-import com.nugroho.spring.api.presist.jobs.book.dto.BookReturnJob;
+import com.nugroho.spring.api.presist.jobs.book.BookReturnJob;
+import com.nugroho.spring.api.presist.jobs.book.dto.BookReturnJobModel;
 import com.google.gson.Gson;
 import com.nugroho.spring.api.global.Middleware;
 import com.nugroho.spring.api.utility.Global;

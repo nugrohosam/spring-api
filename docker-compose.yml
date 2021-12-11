@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   web:
-    build: .
+    image: nugrohosam/spring-api
     ports:
       - "8080:8080"
     entrypoint: java -jar /app.jar
@@ -13,10 +13,6 @@ services:
       - redis
       - rabbitmq
       - postgres
-    environment:
-      POSTGRE_HOST: postgres
-      RABBITMQ_HOST: rabbitmq
-      REDIS_HOST: redis
   redis:
     image: redis
     ports:
@@ -31,8 +27,8 @@ services:
     ports: 
       - "5432:5432"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: springapi
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
 volumes:
   logvolume01: {}
