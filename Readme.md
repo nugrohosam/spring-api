@@ -1,3 +1,2 @@
-## Test application
-
-$ `build.sh && run.sh`
+## Test App
+$ `sh ./test-app/run.sh`
